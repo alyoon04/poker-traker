@@ -14,3 +14,10 @@ SessionLocal = sessionmaker(bind=engine) #creates a session factory that can be 
 if __name__ == "__main__":
     with engine.connect() as connection:
         print("Connected to the database!")
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally: #finally means run it no matter what error or not
+        db.close()
